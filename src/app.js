@@ -14,7 +14,7 @@ app.get('/weather', async (req, res) => {
         const { latitude, longitude } = req.query; // Get from query params (like ?lat=123&lon=456)
 
         // OpenWeatherMap API request
-        const apiKey = 'YOUR_API_KEY'; // Replace with your API key
+        const apiKey = '4271f9eca3b7a15fd663948149d38fba'; // Replace with your API key
         const weatherData = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`);
 
         // Send weather data as JSON response
