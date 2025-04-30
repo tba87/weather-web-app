@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 
 // Serve static files (HTML, CSS, JS) from 'public' folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Endpoint to fetch weather data
 app.get('/weather', async (req, res) => {
