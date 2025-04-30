@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#weather-info {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+p {
+    font-size: 1.2rem;
+}
+
+/* Geometric pattern animation */
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+body {
+    animation: rotate 10s infinite linear;
+}
