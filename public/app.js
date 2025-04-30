@@ -1,18 +1,34 @@
-// Get the user's geolocation
-navigator.geolocation.getCurrentPosition(async (position) => {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    // Fetch weather data from the server
-    const response = await fetch(`/weather?latitude=${lat}&longitude=${lon}`);
-    const data = await response.json();
-
-    // Update the page with fetched data
-    document.getElementById('location').textContent = `Location: ${data.name}, ${data.sys.country}`;
-    document.getElementById('date').textContent = `Date: ${new Date().toLocaleDateString()}`;
-    document.getElementById('time').textContent = `Time: ${new Date().toLocaleTimeString()}`;
-    document.getElementById('timezone').textContent = `Timezone: ${timezone}`;
-    document.getElementById('temperature').textContent = `Temperature: ${data.main.temp}°C`;
-    document.getElementById('weather-condition').textContent = `Weather: ${data.weather[0].description}`;
-});
+// Function to update date and time
+function updateDateTime() {
+    const now = new Date();
+    const dateTimeString = now.toLocaleString();
+    document.getElementById('date-time').textContent = `Current Date and Time: ${dateTimeString}`;
+  }
+  
+  // Function to fetch weather data
+  async function fetchWeather() {
+    try {
+      // Get user's geolocation
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const { latitude, longitude } = position.coords;
+  
+        // Fetch weather data from your backend
+        const response = await fetch(`/weather?latitude=${latitude}&longitude=${longitude}`);
+        const data = await response.json();
+  
+        // Display weather information
+        document.getElementById('weather').textContent = `Temperature: ${data.main.temp}°C, Condition: ${data.weather[0].description}`;
+      });
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+      document.getElementById('weather').textContent = 'Unable to retrieve weather data.';
+    }
+  }
+  
+  // Initialize functions
+  updateDateTime();
+  fetchWeather();
+  
+  // Update date and time every minute
+  setInterval(updateDateTime, 60000);
+  
